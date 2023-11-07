@@ -1,12 +1,12 @@
-const boxs = document.querySelectorAll('.box');
+const cells = document.querySelectorAll('.cell');
 let currentPlayer = 'X';
 let moves = 0;
 
 function handleClick(e) {
   moves++;
-  const box = e.target;
-  box.textContent = currentPlayer;
-  box.removeEventListener('click', handleClick);
+  const cell = e.target;
+  cell.textContent = currentPlayer;
+  cell.removeEventListener('click', handleClick);
 
   const winner = checkForWinner();
   if (winner) {
@@ -20,8 +20,8 @@ function handleClick(e) {
   }
 }
 
-for (const box of boxs) {
-  boxs.addEventListener('click', handleClick);
+for (const cell of cells) {
+  cell.addEventListener('click', handleClick);
 }
 
 function checkForWinner() {
@@ -39,9 +39,9 @@ function checkForWinner() {
   for (const combination of winningCombinations) {
     const [a, b, c] = combination;
     if (
-      boxs[a].textContent === currentPlayer &&
-      boxs[b].textContent === currentPlayer &&
-      boxs[c].textContent === currentPlayer
+      cells[a].textContent === currentPlayer &&
+      cells[b].textContent === currentPlayer &&
+      cells[c].textContent === currentPlayer
     ) {
       return currentPlayer;
     }
@@ -55,9 +55,9 @@ function switchPlayer() {
 }
 
 function resetGame() {
-  for (const box of boxs) {
-    box.textContent = '';
-    box.addEventListener('click', handleClick);
+  for (const cell of cells) {
+    cell.textContent = '';
+    cell.addEventListener('click', handleClick);
   }
   moves = 0;
   currentPlayer = 'X';
